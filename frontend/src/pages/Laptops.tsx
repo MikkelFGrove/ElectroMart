@@ -43,6 +43,7 @@ const Laptops = () => {
             />
             <h3>{laptop.title}</h3>
             <p>Price: ${laptop.getPrice()}</p>
+            <p>Price No Tax: ${laptop.getPriceWithoutTaxes()}</p>
           </div>
         ))}
       </div>
