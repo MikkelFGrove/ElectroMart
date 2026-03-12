@@ -1,18 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Phone } from '../models/Phone';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Product } from "../models/Product";
+import { ProductType } from "../models/ProductType";
 
 const Phones = () => {
-  const [listOfphones, setPhones] = useState<Phone[]>([]);
+  const [listOfphones, setPhones] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchPhones = async () => {
       try {
-        const response = await axios.get<Phone[]>('http://localhost:3001/get-products-by-category?productType=Phone');
-        const phones = response.data.map(item => new Phone(item.title, item.imageUrl, item.basePrice));
+        const response = await axios.get<Product[]>(
+          "http://localhost:3001/get-products-by-category?productType=Phone",
+        );
+        const phones = response.data.map(
+          (item) =>
+            new Product(
+              item.title,
+              item.imageUrl,
+              item.basePrice,
+              ProductType.Phone,
+            ),
+        );
         setPhones(phones);
       } catch (error) {
-        console.error('Error fetching phones:', error);
+        console.error("Error fetching phones:", error);
         setPhones([]);
       }
     };
@@ -23,10 +34,14 @@ const Phones = () => {
   return (
     <div className="content-container">
       <h2>Phones</h2>
-      <div className='product-item-container'>
+      <div className="product-item-container">
         {listOfphones.map((phone, index) => (
-          <div className='product-item' key={index}>
-            <img src={phone.imageUrl} alt={phone.title} style={{ width: '100px', height: '100px' }} />
+          <div className="product-item" key={index}>
+            <img
+              src={phone.imageUrl}
+              alt={phone.title}
+              style={{ width: "100px", height: "100px" }}
+            />
             <h3>{phone.title}</h3>
             <p>Price: ${phone.getPrice()}</p>
           </div>
@@ -34,7 +49,6 @@ const Phones = () => {
       </div>
     </div>
   );
-
 };
 
 export default Phones;
