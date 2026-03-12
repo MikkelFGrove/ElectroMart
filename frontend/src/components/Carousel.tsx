@@ -25,13 +25,15 @@ const Carousel = () => {
     fetchProducts();
   }, []);
 
+  if (products.length === 0) {
+    return (
+        <div></div>
+    )
+  }
+
   return (
     <div className="content-container">
-      <h2>Recommended Products!</h2>
-
-      {products.length === 0 ? (
-        <p>Unable to get recommended products...</p>
-      ) : (
+      <h2>Recommended Products!</h2>(
         <Swiper modules={[Navigation]}
           navigation spaceBetween={50} slidesPerView={3}>
           {products.map((product) => (
@@ -44,7 +46,7 @@ const Carousel = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-      )}
+      )
 
     </div>
   );
