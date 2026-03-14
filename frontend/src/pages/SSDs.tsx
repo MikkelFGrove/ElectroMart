@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Product } from "../models/Product";
-import { ProductType } from "../models/ProductType";
 
 const SSDs = () => {
   const [listOfssds, setSSDs] = useState<Product[]>([]);
@@ -18,7 +17,9 @@ const SSDs = () => {
               item.title,
               item.imageUrl,
               item.basePrice,
-              ProductType.SSD,
+              item.taxRate,
+              item.discountRate,
+              item.productType,
             ),
         );
         setSSDs(ssds);

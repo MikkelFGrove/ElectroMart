@@ -25,10 +25,6 @@ export class Product {
   }
 
   public getPrice(): number {
-    return Math.round(this.basePrice * (1 - this.discountRate) * this.taxRate);
-  }
-
-  public getPriceWithoutTaxes(): number {
-    return Math.round(this.basePrice * (1 - this.discountRate));
+    return this.basePrice * (1 - this.discountRate) * this.taxRate;
   }
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Product } from "../models/Product";
-import { ProductType } from "../models/ProductType";
 
 const Laptops = () => {
   const [listOflaptops, setLaptops] = useState<Product[]>([]);
@@ -18,7 +17,9 @@ const Laptops = () => {
               item.title,
               item.imageUrl,
               item.basePrice,
-              ProductType.Laptop,
+              item.taxRate,
+              item.discountRate,
+              item.productType,
             ),
         );
         setLaptops(laptops);

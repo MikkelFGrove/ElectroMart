@@ -1,0 +1,9 @@
+{
+  "discountRates": {
+    "Laptop": 0.2,
+    "SSD": 0.1,
+    "PlayStation": 0.1,
+    "Phone": 0.25
+  },
+  "taxRate": 1.25
+}
