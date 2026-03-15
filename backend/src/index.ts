@@ -1,9 +1,17 @@
 import express, { Request, Response } from 'express';
 import { recommendedProducts } from './dummyData';
+import fs from "node:fs";
 
 const app = express();
 const port = 3001;
 const cors = require('cors');
+var unfinishedFeatureFlag = true
+
+function loadFeatureFlags() {
+    var data = JSON.parse(fs.readFileSync("src/config.json", "utf8"));
+    unfinishedFeatureFlag = data.unfinishedFeatureFlag;
+}
+
 app.use(cors());
 
 app.use(express.json());
@@ -32,9 +40,15 @@ app.get("/get-products-by-category", (req: Request, res: Response) => {
   return res.json(products);
 });
 
+
 app.get("/unfinished-feature", (_: Request, res: Response) => {
-  // Oh no, this feature is not ready for production!
-  return res.status(500).send('Internal Server Error');
+    loadFeatureFlags()
+    if (unfinishedFeatureFlag) {
+        // Oh no, this feature is not ready for production!
+        return res.status(500).send('Internal Server Error');
+    } else {
+        return res.status(404).send('Not Found');
+    }
 });
 
 app.listen(port, () => {
