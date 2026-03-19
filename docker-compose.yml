@@ -12,8 +12,5 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    deploy:
-      mode: replicated
-      replicas: 2
     ports:
-      - "3001-3002:3001"
+      - "3001:3001"
