@@ -12,5 +12,15 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    deploy:
+      mode: replicated
+      replicas: 3
+    expose:
+      - "3001"
+
+  proxy:
+    build:
+        context: ./nginx
+        dockerfile: Dockerfile
     ports:
       - "3001:3001"
